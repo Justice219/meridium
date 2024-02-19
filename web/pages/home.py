@@ -10,7 +10,7 @@ from nicegui import ui
 
 def content(ui, app, sockets) -> None:
     with theme.frame('- Home -'):
-        with ui.card().style('background-color: #242424; color: #ffffff; border: none; width: 150%; hei') as card:
+        with ui.card().style('background-color: #242424; color: #ffffff; border: none; width: 150%;') as card:
             # header
             ui.label('Welcome to Meridium!').style('font-size: 24px; font-weight: bold;')
             
@@ -48,7 +48,7 @@ def content(ui, app, sockets) -> None:
                 feature_cards = [
                     ("Clean Temporary Files", ["Browsers", "Spotify", "Discord", "Windows"]),
                     ("Clean Cache Files", ["Cleans cache files to clear up space."]),
-                    ("Empty Recycle Bin", []),
+                    ("Empty Recycle Bin", ["Permanently deletes all files in the recycle bin."]),
                     ("Clean Browser Data", ["Cache", "Cookies", "History", "Site Data"]),
                     ("Registry Tweaks", ["Coming soon!"]),
                     ("Uninstall Bloatware", ["Coming soon!"])

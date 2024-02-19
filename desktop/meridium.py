@@ -21,7 +21,12 @@ class MeridiumApp():
         if firstWord == "cleanTempFiles":
             print("Received message from web app to clean temp files")
 
-            # send message to web app for it to process what it needs to.
+            # send message to desktop cleaner for it to process what it needs to.
             await self.cleaner.clean_temp_files(message)
+        elif firstWord == "cleanCacheFiles":
+            print("Received message from web app to clean cache files")
+
+            # send message to desktop cleaner for it to process what it needs to.
+            await self.cleaner.clean_cache_files()
     
         

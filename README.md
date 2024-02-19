@@ -1,6 +1,8 @@
 # Meridium
 
-Meridium is a computer performance application designed to help speed up your PC. It provides a range of features including cleaning temporary files, tweaking Windows registry, and more. The application is divided into two parts: a desktop application and a web application, which communicate with each other using WebSockets. This was not necessary for the functionality of the application, but was done as a learning exercise to understand networking with WebSockets.
+Meridium is a computer performance application designed to help speed up your PC. It provides a range of features including cleaning temporary files, tweaking Windows registry, and more. 
+\n
+The application is divided into two parts: a desktop application and a web application, which communicate with each other using WebSockets. This was not necessary for the functionality of the application, but was done as a learning exercise to understand networking with WebSockets.
 
 ## Features
 

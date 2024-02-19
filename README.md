@@ -2,7 +2,7 @@
 
 Meridium is an innovative computer performance application designed to optimize and speed up your PC. Leveraging a suite of tools for cleaning temporary files, tweaking Windows registry settings, and more, Meridium stands out with its unique architecture. It comprises a desktop application and a web application that communicate via WebSockets—a design choice made to explore networking concepts. Although this dual-part setup isn't necessary for the core functionality, it adds a fascinating layer of complexity and learning to the project.
 
-*Note* Requires A Windows Computer! This should be assumed though
+**Note** Requires A Windows Computer! This should be assumed though**
 
 ![2r2332r2332](https://github.com/Justice219/meridium/assets/65798268/ef4ef41c-732e-446f-8772-de3860924d8c)
 ![jjjjj](https://github.com/Justice219/meridium/assets/65798268/84297b65-cefc-478d-a294-e3ab8761e01c)

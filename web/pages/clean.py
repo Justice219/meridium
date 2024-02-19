@@ -9,7 +9,6 @@ options = {
 }
 
 async def confirm(sockets):
-    ui.notify("Please respond to the dialog")
     with ui.dialog() as dialog, ui.card().style('background-color: #242424; color: #ffffff; border: none;'):
         ui.label('Are you sure you want to clean temporary files?')
         with ui.row():
@@ -18,8 +17,6 @@ async def confirm(sockets):
 
     result = await dialog
     if result == "Yes":
-        ui.notify("Cleaning temporary files")
-
         # Create table of only true options
         data = []
         for key, value in options.items():

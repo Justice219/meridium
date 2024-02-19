@@ -8,7 +8,7 @@ class MeridiumApp():
     def __init__(self):
         self.name = "Meridium"
         self.sockets = SocketClient(server_address=f"ws://localhost:8765")
-        self.cleaner = Cleaner()
+        self.cleaner = Cleaner(self.sockets)
         self.sockets.register_callback(self.read_message)
 
     async def run(self):

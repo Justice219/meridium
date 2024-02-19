@@ -1,1 +1,1 @@
-__all__ = ['sockets_server']
+__all__ = ['sockets_server', 'shared_resources']

@@ -4,15 +4,28 @@ from typing import Set
 import websockets
 from websockets.server import WebSocketServerProtocol
 
+from network.shared_resources import pending_notifications
+
+from nicegui import ui
+
 CONNECTIONS: Set[WebSocketServerProtocol] = set()
 
 class SocketsServer():
+    def __init__(self):
+        print("SERVER: SocketsServer initialized")
+
     async def handle_message(self, websocket: WebSocketServerProtocol) -> None:
         while True:
             try:
                 message = await websocket.recv()
                 # Process the received message here
                 print(f"SERVER: Received message: {message}")
+
+                # check message for any commands
+                firstWord = message.split(" ")[0]
+                if firstWord == "Sucess":
+                    # add notification to pending_notifications with a unique id being the length of the list + 1
+                    pending_notifications[len(pending_notifications) + 1] = {"message": message, "type": "positive"}
                 
                 # Send a response back to the client
                 response = f"SERVER received: {message}"

@@ -7,8 +7,9 @@ import psutil
 from system.process_util import process_open, close_application
 
 class Cleaner():
-    def __init__(self):
+    def __init__(self, sockets):
         self.name = "Cleaner"
+        self.sockets = sockets
 
     async def check_and_close_applications(self, applications: list[str]):
         for application in applications:
@@ -83,6 +84,9 @@ class Cleaner():
                         print(f"CLIENT: Cleaned {browser.capitalize()} temp files in {browser_path}")
                     except Exception as e:
                         print(f"CLIENT: Error cleaning {browser.capitalize()} temp files in {browser_path}: {e}")
+
+        # send a message to web app that the cleaning is done so it can display a notification
+        await self.sockets.send_message("Sucess - Cleaned temporary files")
 
 
 

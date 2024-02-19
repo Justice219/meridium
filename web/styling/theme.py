@@ -6,7 +6,7 @@ from nicegui import ui
 
 @contextmanager
 def frame(navtitle: str):
-    ui.colors(primary='#1a1919', secondary='#242424', accent='#242424', positive='#242424')
+    ui.colors(primary='#1a1919', secondary='#242424', accent='#242424', positive='#00ff00')
     ui.query('body').style('background-color: #242424')
     # text color
     ui.query('body').style('color: #ffffff')

@@ -24,6 +24,7 @@ async def confirm(sockets):
                 data.append(key)
 
         # Use sockets to send options to desktop app
+        ui.notify("Cleaned temporary files!", type="positive")
         await sockets.send_message("cleanTempFiles - " + str(data))
 
     else:

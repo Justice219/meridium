@@ -9,6 +9,7 @@ class MeridiumApp():
         self.name = "Meridium"
         self.sockets = SocketClient(server_address=f"ws://localhost:8765")
         self.cleaner = Cleaner()
+        self.sockets.register_callback(self.read_message)
 
     async def run(self):
         print(f"{self.name} is running")
@@ -21,6 +22,6 @@ class MeridiumApp():
             print("Received message from web app to clean temp files")
 
             # send message to web app for it to process what it needs to.
-            self.cleaner.clean_temp_files(message)
+            await self.cleaner.clean_temp_files(message)
     
         

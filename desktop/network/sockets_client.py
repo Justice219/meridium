@@ -33,7 +33,7 @@ class SocketClient:
 
             # Call all registered callbacks with the received message
             for callback in self.callbacks:
-                callback(response)
+                await callback(response)
 
             return response
 

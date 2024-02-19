@@ -1,50 +1,56 @@
-# Meridium
+# Meridium: Speed Up Your PC with Ease
 
-Meridium is a computer performance application designed to help speed up your PC. It provides a range of features including cleaning temporary files, tweaking Windows registry, and more.\n
-
-The application is divided into two parts: a desktop application and a web application, which communicate with each other using WebSockets. This was not necessary for the functionality of the application, but was done as a learning exercise to understand networking with WebSockets. The Desktop act isn't interactive whatsoever, and just serves as a websocket client and run's code in the background with a loop. The Web App, is a reactive website using NiceGUI! It sends messages to the desktop app with websockets in order to make changes to the computer. Super duper crazy right? A reminder once again that this was just a learning project!
+Meridium is an innovative computer performance application designed to optimize and speed up your PC. Leveraging a suite of tools for cleaning temporary files, tweaking Windows registry settings, and more, Meridium stands out with its unique architecture. It comprises a desktop application and a web application that communicate via WebSockets—a design choice made to explore networking concepts. Although this dual-part setup isn't necessary for the core functionality, it adds a fascinating layer of complexity and learning to the project.
 
 ![2r2332r2332](https://github.com/Justice219/meridium/assets/65798268/ef4ef41c-732e-446f-8772-de3860924d8c)
 ![jjjjj](https://github.com/Justice219/meridium/assets/65798268/84297b65-cefc-478d-a294-e3ab8761e01c)
 
-## Features
+## Key Features
 
-- **File Cleaning**: Meridium can clean up temporary files from various applications such as browsers, Spotify, Discord, and Windows itself. This helps free up disk space and can improve system performance.
+- **File Cleaning**: Effortlessly removes temporary files from browsers, Spotify, Discord, and Windows, freeing up valuable disk space and enhancing system performance.
+- **Windows Registry Tweaking**: Optimizes system performance through strategic modifications to the Windows registry.
+- **Performance Boost**: Achieves a faster PC by eliminating unnecessary files and adjusting system settings for optimal operation.
 
-- **Windows Registry Tweaking**: Meridium can make changes to the Windows registry to help optimize system performance.
+## Project Overview
 
-- **Performance Boost**: By cleaning up unnecessary files and tweaking system settings, Meridium can help speed up your PC.
+Meridium is divided into two interconnected parts:
 
-## Project Structure
+- **Desktop Application**: Acts as a WebSocket client, running non-interactive background processes.
+- **Web Application**: A dynamic NiceGUI-powered interface that communicates with the desktop application to execute system modifications.
 
-The project is divided into two main parts: the desktop application and the web application.
+### Desktop Directory
 
-- The desktop application is located in the `desktop` directory. It includes the main application logic and system-level operations such as file cleaning and registry tweaking.
+Contains the core application logic, including file cleaning and registry tweaking functionalities.
 
-- The web application is located in the `web` directory. It provides a user interface for interacting with the desktop application.
+### Web Directory
 
-## Installation
-Before running the application, you need to install the required Python packages. You can do this by running the following command in your terminal:
+Houses the user interface for managing and interacting with the desktop application's features.
+
+## Getting Started
+
+### Installation
+
+Prepare your environment by installing the required Python packages:
 
 ```sh
 pip install -r requirements.txt
 ```
 
-## Running the Application
+### Running Meridium
 
-To run the application, you simply need to run the `main.py` script:
+Launch the application with the following command:
 
 ```sh
 python main.py
 ```
-![4t44434t](https://github.com/Justice219/meridium/assets/65798268/67e16823-c405-4556-b28c-7a5a8ea633dc)
+![4t44434t](https://github.com/Justice219/meridium/assets/65798268/eb857efe-d2e5-4389-b6e8-700f9fd427ec)
 
-This script starts both the desktop and web parts of the application.
+This command initiates both the desktop and web components, enabling full application functionality.
 
-## Contributing
+## Contributing to Meridium
 
-Contributions to Meridium are welcome! Please read our contributing guidelines before submitting a pull request.
+We welcome contributions! If you're interested in improving Meridium, please consult our contributing guidelines before submitting a pull request.
 
 ## License
 
-Meridium is licensed under the MIT license. See the LICENSE file for more details.
+Meridium is open-sourced under the MIT license, fostering innovation and collaboration. For more details, refer to the LICENSE file.

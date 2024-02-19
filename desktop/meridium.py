@@ -28,5 +28,15 @@ class MeridiumApp():
 
             # send message to desktop cleaner for it to process what it needs to.
             await self.cleaner.clean_cache_files()
-    
+
+        elif firstWord == "emptyRecycleBin":
+            print("Received message from web app to empty recycle bin")
+
+            # send message to desktop cleaner for it to process what it needs to.
+            await self.cleaner.empty_recycle_bin()
         
+        elif firstWord == "cleanBrowserData":
+            print("Received message from web app to clean browser data")
+
+            # send message to desktop cleaner for it to process what it needs to.
+            await self.cleaner.clean_browser_data(message)

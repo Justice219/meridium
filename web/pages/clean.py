@@ -149,14 +149,17 @@ def content(ui, app, sockets) -> None:
                     # Cache Files box
                     with theme.box('Cache Files', style=box_style):
                         ui.label('Clean cache files to free up space.').classes('text-white-8')
-                        ui.label('Note: This may delete certain important files.').classes('text-white-8').style('font-size: 12px; margin-bottom: 10px;')
+                        ui.label('Note: This may delete certain important files.').classes('text-white-8').style('font-size: 12px; margin-bottom: 42px;')
                         ui.button('Clean Cache Files', on_click=lambda: clean_cache_files(sockets)).style('width: 100%;')
 
                     # Recycle Bin box
                     with theme.box('Recycle Bin', style=box_style):
                         ui.label('Empty the recycle bin to clear up space.').classes('text-white-8')
-                        ui.label('Note: This action is irreversible.').classes('text-warning').style('font-size: 12px; margin-bottom: 10px;')
-                        ui.button('Empty Recycle Bin', on_click=lambda: empty_recycle_bin(sockets)).style('width: 100%;')
+                        ui.label('Note: This action is irreversible.').classes('text-warning').style('font-size: 12px; margin-bottom: 32px;')
+
+                        with ui.row().style('display: flex; justify-content: space-around;'):
+                            ui.button('Empty Recycle Bin', on_click=lambda: empty_recycle_bin(sockets)).style('width: 100%; margin-top: 10px; position: relative; bottom: 0;')
+                        
 
                     # Browser Data box
                     with theme.box('Browser Data', style=box_style):
@@ -167,3 +170,11 @@ def content(ui, app, sockets) -> None:
                             ui.checkbox("History", on_change=checkbox_callback(browser_options, 'history')).style('flex: 1;')
                             ui.checkbox("Site Data", on_change=checkbox_callback(browser_options, 'siteData')).style('flex: 1;')
                         ui.button('Clean Browser Data', on_click=lambda: clean_browser_data(sockets)).style('width: 100%; margin-top: 10px;')
+
+                    # empty box to fill space
+                    with theme.box('', style=box_style):
+                        ui.label('')
+
+                    # empty box to fill space
+                    with theme.box('', style=box_style):
+                        ui.label('')

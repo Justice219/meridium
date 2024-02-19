@@ -18,8 +18,7 @@ def frame(navtitle: str):
         with ui.row():
             menu()
 
-    with ui.column().classes('absolute-center items-center'):
-        yield
+    yield
 
     # footer with github link
     with ui.footer().classes('justify-center text-white'):
@@ -28,6 +27,8 @@ def frame(navtitle: str):
 
             # open github url
             ui.button(on_click=lambda: ui.open("https://github.com/Justice219/meridium", new_tab=True)).style('border: none; background: none;').classes('eva eva-github text-3xl').style('position: absolute; right: 0; padding-right: 20px; width: 1%; height: 1%;')
+
+
 @contextmanager
 def box(title, style=None):
     # Apply default styles and merge with any provided styles

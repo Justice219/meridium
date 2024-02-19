@@ -1,8 +1,9 @@
 import asyncio
-from typing import Set
+import logging
+from typing import Set, Dict, Any
 
 import websockets
-from websockets.server import WebSocketServerProtocol
+from websockets.legacy.server import WebSocketServerProtocol
 
 from network.shared_resources import pending_notifications
 
@@ -10,54 +11,55 @@ from nicegui import ui
 
 CONNECTIONS: Set[WebSocketServerProtocol] = set()
 
-class SocketsServer():
+# Initialize simpler logging as per the new preference
+logging.basicConfig(level=logging.INFO, format='SERVER: %(message)s')
+logger = logging.getLogger(__name__)
+
+logger = logging.getLogger(__name__)
+
+class SocketsServer:
     def __init__(self):
-        print("SERVER: SocketsServer initialized")
+        logger.info("SocketsServer initialized")
 
     async def handle_message(self, websocket: WebSocketServerProtocol) -> None:
         while True:
             try:
                 message = await websocket.recv()
-                # Process the received message here
-                print(f"SERVER: Received message: {message}")
+                logger.info(f"Received message: {message}")
 
-                # check message for any commands
-                firstWord = message.split(" ")[0]
-                if firstWord == "Sucess":
-                    # add notification to pending_notifications with a unique id being the length of the list + 1
+                first_word = message.split(" ")[0]
+                if first_word == "Success":
                     pending_notifications[len(pending_notifications) + 1] = {"message": message, "type": "positive"}
-                
-                # Send a response back to the client
+
                 response = f"SERVER received: {message}"
                 await websocket.send(response)
-                
-            except websockets.exceptions.ConnectionClosed:
-                # Remove the closed connection from the set
+
+            except websockets.exceptions.ConnectionClosed as e:
+                logger.info(f"Connection closed with error: {e}")
                 CONNECTIONS.remove(websocket)
+                break
+            except Exception as e:
+                logger.error(f"Error receiving message: {e}")
                 break
 
     async def send_message(self, message: str) -> None:
+        disconnected_sockets = set()
         for websocket in CONNECTIONS:
-            await websocket.send(message)
+            try:
+                await websocket.send(message)
+            except websockets.exceptions.ConnectionClosed:
+                disconnected_sockets.add(websocket)
+        CONNECTIONS.difference_update(disconnected_sockets)
         
-        print(f"SERVER: Sent message to {len(CONNECTIONS)} clients")
+        logger.info(f"Sent message to {len(CONNECTIONS)} clients")
 
     async def handle_connection(self, websocket: WebSocketServerProtocol, path: str) -> None:
-        # Add the new connection to the set
         CONNECTIONS.add(websocket)
-        
-        # Print a message to the console
-        print(f"SERVER: New connection from {websocket.remote_address}")
+        logger.info(f"New connection from {websocket.remote_address}")
 
-        # Start handling messages for this connection
         await self.handle_message(websocket)
 
     async def start_server(self) -> None:
-        # Start the WebSocket server
-        async with websockets.serve(self.handle_connection, "localhost", 8765):
-            print("SERVER: WebSocket server started")
-            await asyncio.Future()  # Keep the server running indefinitely
-
-# Create an instance of the Sockets class and start the server
-#sockets = Sockets()
-#asyncio.run(sockets.start_server())
+        server = await websockets.serve(self.handle_connection, "localhost", 8765)
+        logger.info("WebSocket server started")
+        await server.wait_closed()

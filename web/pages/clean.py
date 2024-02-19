@@ -115,7 +115,7 @@ def content(ui, app, sockets) -> None:
     with ui.column().style('display: flex; flex-direction: column; height: 100vh;'):
 
         # Flex container for boxes, ensuring they wrap and are spaced evenly
-        with theme.frame('Clean System Tools'):
+        with theme.frame('- Clean System Tools -'):
             # Flex container for boxes, ensuring they wrap and are spaced evenly
             with ui.column().style('flex: 1; overflow-y: auto;'):
                 with ui.row().classes('flex-wrap').style('display: flex; justify-content: space-around; align-items: stretch;'):

@@ -1,57 +1,57 @@
 import asyncio
+import logging
+from typing import List, Callable
 from websockets import connect
 from websockets.client import WebSocketClientProtocol
 
+logger = logging.getLogger(__name__)
+
 class SocketClient:
     def __init__(self, server_address: str):
-        self.server_address = server_address
-        self.websocket: WebSocketClientProtocol = None
-        self.callbacks = []
+        self.server_address: str = server_address
+        self.websocket: WebSocketClientProtocol | None = None
+        self.callbacks: List[Callable[[str], None]] = []
 
     async def connect(self):
-        async with connect(self.server_address) as websocket:
-            self.websocket = websocket
-            print('CLIENT: Connected to the server.')
-            
-            # Send a message to the server
-            await self.send_message('Hello, server!')
-            
-            # Start checking for messages
-            await self.check_for_messages()
+        try:
+            async with connect(self.server_address) as websocket:
+                self.websocket = websocket
+                logger.info('CLIENT: Connected to the server.')
+
+                await self.send_message('Hello, server!')
+                await self.check_for_messages()
+        except Exception as e:
+            logger.error(f'CLIENT: Failed to connect or error during message handling. Error: {e}')
 
     async def send_message(self, message: str):
-        try:
-            await self.websocket.send(message)
-            print(f'CLIENT: Sent message: {message}')
-        except Exception as e:  # Catch more specific exceptions as needed
-            print(f'CLIENT: Failed to send message. Error: {e}')
+        if self.websocket:
+            try:
+                await self.websocket.send(message)
+                logger.info(f'CLIENT: Sent message: {message}')
+            except Exception as e:
+                logger.error(f'CLIENT: Failed to send message. Error: {e}')
 
     async def receive_message(self):
-        try:
-            response = await self.websocket.recv()
-            print(f'CLIENT: Received response: {response}')
+        if self.websocket:
+            try:
+                response = await self.websocket.recv()
+                logger.info(f'CLIENT: Received response: {response}')
 
-            # Call all registered callbacks with the received message
-            for callback in self.callbacks:
-                await callback(response)
+                # Execute callbacks concurrently
+                await asyncio.gather(*(callback(response) for callback in self.callbacks))
 
-            return response
-
-        except Exception as e:  # Catch more specific exceptions as needed
-            print(f'CLIENT: Failed to receive message. Error: {e}')
+                return response
+            except Exception as e:
+                logger.error(f'CLIENT: Failed to receive message. Error: {e}')
 
     async def check_for_messages(self):
-        try:
-            while True:
-                await self.receive_message()
-                await asyncio.sleep(1)  # Adjust as necessary
-        except Exception as e:
-            print(f'CLIENT: Error checking messages. Error: {e}')
-            await self.close()
+        while self.websocket:
+            await self.receive_message()
 
     async def close(self):
-        await self.websocket.close()
-        print('CLIENT: Connection closed.')
+        if self.websocket:
+            await self.websocket.close()
+            logger.info('CLIENT: Connection closed.')
 
-    def register_callback(self, callback):
+    def register_callback(self, callback: Callable[[str], None]):
         self.callbacks.append(callback)

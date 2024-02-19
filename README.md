@@ -4,6 +4,9 @@ Meridium is a computer performance application designed to help speed up your PC
 
 The application is divided into two parts: a desktop application and a web application, which communicate with each other using WebSockets. This was not necessary for the functionality of the application, but was done as a learning exercise to understand networking with WebSockets. The Desktop act isn't interactive whatsoever, and just serves as a websocket client and run's code in the background with a loop. The Web App, is a reactive website using NiceGUI! It sends messages to the desktop app with websockets in order to make changes to the computer. Super duper crazy right? A reminder once again that this was just a learning project!
 
+![2r2332r2332](https://github.com/Justice219/meridium/assets/65798268/ef4ef41c-732e-446f-8772-de3860924d8c)
+![jjjjj](https://github.com/Justice219/meridium/assets/65798268/84297b65-cefc-478d-a294-e3ab8761e01c)
+
 ## Features
 
 - **File Cleaning**: Meridium can clean up temporary files from various applications such as browsers, Spotify, Discord, and Windows itself. This helps free up disk space and can improve system performance.
@@ -21,7 +24,6 @@ The project is divided into two main parts: the desktop application and the web 
 - The web application is located in the `web` directory. It provides a user interface for interacting with the desktop application.
 
 ## Installation
-
 Before running the application, you need to install the required Python packages. You can do this by running the following command in your terminal:
 
 ```sh
@@ -35,6 +37,7 @@ To run the application, you simply need to run the `main.py` script:
 ```sh
 python main.py
 ```
+![4t44434t](https://github.com/Justice219/meridium/assets/65798268/67e16823-c405-4556-b28c-7a5a8ea633dc)
 
 This script starts both the desktop and web parts of the application.
 

@@ -1,4 +1,4 @@
-# Meridium: Speed Up Your PC with Ease
+# Meridium 1.1
 
 Meridium is an innovative computer performance application designed to optimize and speed up your PC. Leveraging a suite of tools for cleaning temporary files, tweaking Windows registry settings, and more, Meridium stands out with its unique architecture. It comprises a desktop application and a web application that communicate via WebSockets—a design choice made to explore networking concepts. Although this dual-part setup isn't necessary for the core functionality, it adds a fascinating layer of complexity and learning to the project.
 
